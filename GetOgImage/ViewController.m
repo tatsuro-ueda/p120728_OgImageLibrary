@@ -44,10 +44,8 @@
     // Web page address
     NSURL *url = [NSURL URLWithString:textField.text];
     
-    // Get the web page HTML
-    NSString *string = 
-    [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-
+	NSString *string = [self encodedStringWithContentsOfURL:url];    
+    
     // prepare regular expression to find text
     NSError *error   = nil;
     NSRegularExpression *regexp =
@@ -56,29 +54,21 @@
                                               options:0
                                                 error:&error];
 
-    @try {
-        // find by regular expression
-        NSTextCheckingResult *match =
-        [regexp firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
-        
-        // get the first result
-        NSRange resultRange = [match rangeAtIndex:0];
-        NSLog(@"match=%@", [string substringWithRange:resultRange]); 
-        
-        if (match) {
-            
-            // get the og:image URL from the find result
-            NSRange urlRange = NSMakeRange(resultRange.location + 35, resultRange.length - 35 - 1);
-            NSURL *urlOgImage = [NSURL URLWithString:[string substringWithRange:urlRange]];
-            imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlOgImage]];
-        }
-    }
-    @catch (NSException *exception) {
-        message.text = @"Exception";
-    }
-    @finally {
-    }
+    // find by regular expression
+    NSTextCheckingResult *match =
+    [regexp firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
     
+    // get the first result
+    NSRange resultRange = [match rangeAtIndex:0];
+    NSLog(@"match=%@", [string substringWithRange:resultRange]); 
+    
+    if (match) {
+        
+        // get the og:image URL from the find result
+        NSRange urlRange = NSMakeRange(resultRange.location + 35, resultRange.length - 35 - 1);
+        NSURL *urlOgImage = [NSURL URLWithString:[string substringWithRange:urlRange]];
+        imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlOgImage]];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textFieldTmp
@@ -86,4 +76,34 @@
     [textFieldTmp resignFirstResponder];
     return YES;
 }
+
+- (NSString *)encodedStringWithContentsOfURL:(NSURL *)url
+{
+    // Get the web page HTML
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    
+	// response
+	int enc_arr[] = {
+		NSUTF8StringEncoding,			// UTF-8
+		NSShiftJISStringEncoding,		// Shift_JIS
+		NSJapaneseEUCStringEncoding,	// EUC-JP
+		NSISO2022JPStringEncoding,		// JIS
+		NSUnicodeStringEncoding,		// Unicode
+		NSASCIIStringEncoding			// ASCII
+	};
+	NSString *data_str = nil;
+	int max = sizeof(enc_arr) / sizeof(enc_arr[0]);
+	for (int i=0; i<max; i++) {
+		data_str = [
+                    [NSString alloc]
+                    initWithData : data
+                    encoding : enc_arr[i]
+                    ];
+		if (data_str!=nil) {
+			break;
+		}
+	}
+	return data_str;    
+}
+
 @end
