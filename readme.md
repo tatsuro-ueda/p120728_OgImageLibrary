@@ -1,3 +1,10 @@
+## Sample project to get og:image
+
+
+The probrem was already solved. The reason of error is mis-handling of character encoding.
+
+-----
+
 The first sample is success case.
 
 The URL is <http://www.nicovideo.jp/watch/1343369790>
