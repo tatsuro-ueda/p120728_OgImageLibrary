@@ -39,6 +39,8 @@
 
 - (IBAction)request:(id)sender {
     
+    [textField resignFirstResponder];
+
     // Web page address
     NSURL *url = [NSURL URLWithString:textField.text];
     
@@ -61,6 +63,7 @@
         
         // get the first result
         NSRange resultRange = [match rangeAtIndex:0];
+        NSLog(@"match=%@", [string substringWithRange:resultRange]); 
         
         if (match) {
             

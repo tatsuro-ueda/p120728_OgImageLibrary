@@ -39,7 +39,7 @@
                                     <action selector="request:" destination="2" eventType="touchUpInside" id="Jz5-bC-OgH"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="mNI-74-Vd1">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="mNI-74-Vd1">
                                 <rect key="frame" x="40" y="146" width="240" height="240"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
