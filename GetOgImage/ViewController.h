@@ -12,7 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *textField;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
-@property (strong, nonatomic) IBOutlet UILabel *message;
 
 - (IBAction)request:(id)sender;
 @end

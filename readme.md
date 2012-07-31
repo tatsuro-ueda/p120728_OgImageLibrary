@@ -3,8 +3,38 @@
 
 The probrem was already solved. The reason of error is mis-handling of character encoding.
 
-Codes below handle the character encoding of HTML.
+Codes below handle the character encoding of HTML and return og:image URL.
 
+	- (NSURL *)ogImageURLWithURL:(NSURL *)url
+	{
+		NSString *string = [self encodedStringWithContentsOfURL:url];    
+	    
+	    // prepare regular expression to find text
+	    NSError *error   = nil;
+	    NSRegularExpression *regexp =
+	    [NSRegularExpression regularExpressionWithPattern:
+	     @"<meta property=\"og:image\" content=\".+\""
+	                                              options:0
+	                                                error:&error];
+	    
+	    // find by regular expression
+	    NSTextCheckingResult *match =
+	    [regexp firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
+	    
+	    // get the first result
+	    NSRange resultRange = [match rangeAtIndex:0];
+	    NSLog(@"match=%@", [string substringWithRange:resultRange]); 
+	    
+	    if (match) {
+	        
+	        // get the og:image URL from the find result
+	        NSRange urlRange = NSMakeRange(resultRange.location + 35, resultRange.length - 35 - 1);
+	        NSURL *urlOgImage = [NSURL URLWithString:[string substringWithRange:urlRange]];
+	        return urlOgImage;
+	    }
+	    return nil;
+	}
+	
     - (NSString *)encodedStringWithContentsOfURL:
         (NSURL *)url
     {

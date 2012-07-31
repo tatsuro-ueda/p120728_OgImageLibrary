@@ -15,7 +15,6 @@
 @implementation ViewController
 @synthesize textField;
 @synthesize imageView;
-@synthesize message;
 
 - (void)viewDidLoad
 {
@@ -27,7 +26,6 @@
 {
     [self setTextField:nil];
     [self setImageView:nil];
-    [self setMessage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -44,6 +42,19 @@
     // Web page address
     NSURL *url = [NSURL URLWithString:textField.text];
     
+    // get og:image URL
+    NSURL *urlOgImage = [self ogImageURLWithURL:url];
+    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlOgImage]];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textFieldTmp
+{
+    [textFieldTmp resignFirstResponder];
+    return YES;
+}
+
+- (NSURL *)ogImageURLWithURL:(NSURL *)url
+{
 	NSString *string = [self encodedStringWithContentsOfURL:url];    
     
     // prepare regular expression to find text
@@ -53,7 +64,7 @@
      @"<meta property=\"og:image\" content=\".+\""
                                               options:0
                                                 error:&error];
-
+    
     // find by regular expression
     NSTextCheckingResult *match =
     [regexp firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
@@ -67,14 +78,9 @@
         // get the og:image URL from the find result
         NSRange urlRange = NSMakeRange(resultRange.location + 35, resultRange.length - 35 - 1);
         NSURL *urlOgImage = [NSURL URLWithString:[string substringWithRange:urlRange]];
-        imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlOgImage]];
+        return urlOgImage;
     }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textFieldTmp
-{
-    [textFieldTmp resignFirstResponder];
-    return YES;
+    return nil;
 }
 
 - (NSString *)encodedStringWithContentsOfURL:(NSURL *)url
