@@ -18,3 +18,7 @@ A project with one text field and one image view. When you enter the URL, the og
 For example, in the below screenshot, the URL is <http://www.nicovideo.jp/watch/1343369790>
 
 ![Screen Shot](http://farm8.staticflickr.com/7118/7660481312_c8997f74a7_o.png)
+
+### Licence
+
+This library is under MIT licence.
