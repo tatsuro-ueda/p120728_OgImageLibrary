@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSURL+OgImage.h"
 
 @interface ViewController ()
 
@@ -20,6 +21,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    textField.text = @"http://mainichi.jp/select/news/20120801mog00m040006000c.html";
 }
 
 - (void)viewDidUnload
@@ -42,9 +44,9 @@
     // Web page address
     NSURL *url = [NSURL URLWithString:textField.text];
     
-    // get og:image URL
-    NSURL *urlOgImage = [self ogImageURLWithURL:url];
-    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:urlOgImage]];
+    // get og:image
+    NSData *d = [NSData dataWithContentsOfURL:[NSURL ogImageURLWithURL:url]];
+    imageView.image = [UIImage imageWithData:d];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textFieldTmp
@@ -53,63 +55,5 @@
     return YES;
 }
 
-- (NSURL *)ogImageURLWithURL:(NSURL *)url
-{
-	NSString *string = [self encodedStringWithContentsOfURL:url];    
-    
-    // prepare regular expression to find text
-    NSError *error   = nil;
-    NSRegularExpression *regexp =
-    [NSRegularExpression regularExpressionWithPattern:
-     @"<meta property=\"og:image\" content=\".+\""
-                                              options:0
-                                                error:&error];
-    
-    // find by regular expression
-    NSTextCheckingResult *match =
-    [regexp firstMatchInString:string options:0 range:NSMakeRange(0, string.length)];
-    
-    // get the first result
-    NSRange resultRange = [match rangeAtIndex:0];
-    NSLog(@"match=%@", [string substringWithRange:resultRange]); 
-    
-    if (match) {
-        
-        // get the og:image URL from the find result
-        NSRange urlRange = NSMakeRange(resultRange.location + 35, resultRange.length - 35 - 1);
-        NSURL *urlOgImage = [NSURL URLWithString:[string substringWithRange:urlRange]];
-        return urlOgImage;
-    }
-    return nil;
-}
-
-- (NSString *)encodedStringWithContentsOfURL:(NSURL *)url
-{
-    // Get the web page HTML
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    
-	// response
-	int enc_arr[] = {
-		NSUTF8StringEncoding,			// UTF-8
-		NSShiftJISStringEncoding,		// Shift_JIS
-		NSJapaneseEUCStringEncoding,	// EUC-JP
-		NSISO2022JPStringEncoding,		// JIS
-		NSUnicodeStringEncoding,		// Unicode
-		NSASCIIStringEncoding			// ASCII
-	};
-	NSString *data_str = nil;
-	int max = sizeof(enc_arr) / sizeof(enc_arr[0]);
-	for (int i=0; i<max; i++) {
-		data_str = [
-                    [NSString alloc]
-                    initWithData : data
-                    encoding : enc_arr[i]
-                    ];
-		if (data_str!=nil) {
-			break;
-		}
-	}
-	return data_str;    
-}
 
 @end

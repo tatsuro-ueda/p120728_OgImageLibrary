@@ -15,7 +15,8 @@
 		072ACFC015C3B195000D6541 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 072ACFBF15C3B195000D6541 /* AppDelegate.m */; };
 		072ACFC315C3B195000D6541 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 072ACFC115C3B195000D6541 /* MainStoryboard.storyboard */; };
 		072ACFC615C3B195000D6541 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 072ACFC515C3B195000D6541 /* ViewController.m */; };
-		0797E33415C8A73100DA3AFD /* NSURL+ogImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E33315C8A73100DA3AFD /* NSURL+ogImage.m */; };
+		0797E35D15C908BF00DA3AFD /* NSString+Encode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E35C15C908BF00DA3AFD /* NSString+Encode.m */; };
+		0797E37815C9186700DA3AFD /* NSURL+OgImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797E37715C9186700DA3AFD /* NSURL+OgImage.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +33,10 @@
 		072ACFC215C3B195000D6541 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		072ACFC415C3B195000D6541 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		072ACFC515C3B195000D6541 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		0797E33215C8A73100DA3AFD /* NSURL+ogImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ogImage.h"; sourceTree = "<group>"; };
-		0797E33315C8A73100DA3AFD /* NSURL+ogImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ogImage.m"; sourceTree = "<group>"; };
+		0797E35B15C908BF00DA3AFD /* NSString+Encode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Encode.h"; sourceTree = "<group>"; };
+		0797E35C15C908BF00DA3AFD /* NSString+Encode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Encode.m"; sourceTree = "<group>"; };
+		0797E37615C9186700DA3AFD /* NSURL+OgImage.h */ = {isa = PBXFileReference; fileEncoding = 4; path = "NSURL+OgImage.h"; sourceTree = "<group>"; };
+		0797E37715C9186700DA3AFD /* NSURL+OgImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+OgImage.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,13 +83,15 @@
 		072ACFB515C3B195000D6541 /* GetOgImage */ = {
 			isa = PBXGroup;
 			children = (
+				0797E37615C9186700DA3AFD /* NSURL+OgImage.h */,
+				0797E37715C9186700DA3AFD /* NSURL+OgImage.m */,
+				0797E35B15C908BF00DA3AFD /* NSString+Encode.h */,
+				0797E35C15C908BF00DA3AFD /* NSString+Encode.m */,
 				072ACFBE15C3B195000D6541 /* AppDelegate.h */,
 				072ACFBF15C3B195000D6541 /* AppDelegate.m */,
 				072ACFC115C3B195000D6541 /* MainStoryboard.storyboard */,
 				072ACFC415C3B195000D6541 /* ViewController.h */,
 				072ACFC515C3B195000D6541 /* ViewController.m */,
-				0797E33215C8A73100DA3AFD /* NSURL+ogImage.h */,
-				0797E33315C8A73100DA3AFD /* NSURL+ogImage.m */,
 				072ACFB615C3B195000D6541 /* Supporting Files */,
 			);
 			path = GetOgImage;
@@ -168,7 +173,8 @@
 				072ACFBC15C3B195000D6541 /* main.m in Sources */,
 				072ACFC015C3B195000D6541 /* AppDelegate.m in Sources */,
 				072ACFC615C3B195000D6541 /* ViewController.m in Sources */,
-				0797E33415C8A73100DA3AFD /* NSURL+ogImage.m in Sources */,
+				0797E35D15C908BF00DA3AFD /* NSString+Encode.m in Sources */,
+				0797E37815C9186700DA3AFD /* NSURL+OgImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

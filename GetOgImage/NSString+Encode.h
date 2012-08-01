@@ -10,4 +10,6 @@
 
 @interface NSString (Encode)
 
++ (NSString *)encodedStringWithContentsOfURL:(NSURL *)url;
+
 @end
