@@ -1,5 +1,5 @@
 //
-//  NSURL+ogImage.h
+//  NSURL+OgImage.h
 //  GetOgImage
 //
 //  Created by 達郎 植田 on 12/08/01.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSURL(ogImage)
+@interface NSURL (OgImage)
 
 @end

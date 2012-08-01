@@ -1,13 +1,13 @@
 //
-//  NSURL+ogImage.m
+//  NSURL+OgImage.m
 //  GetOgImage
 //
 //  Created by 達郎 植田 on 12/08/01.
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import "NSURL+ogImage.h"
+#import "NSURL+OgImage.h"
 
-@implementation NSURL(ogImage)
+@implementation NSURL (OgImage)
 
 @end
